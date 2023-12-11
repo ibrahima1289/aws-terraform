@@ -1,3 +1,9 @@
+# Key pair
+# resource "aws_key_pair" "ec2_key" {
+#   key_name   = "ec2_key"
+#   public_key = file("~/.ssh/id_rsa.pub")
+# }
+
 # Security groups
 resource "aws_security_group" "ec2-server-sg" {
   name        = "server-sg"

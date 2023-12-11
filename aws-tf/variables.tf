@@ -38,3 +38,10 @@ variable "ec2_server_public_ip" {
   description = "Associate,public IP to EC2"
   default     = true
 }
+
+# variable "ec2_key_pair" {
+#   type        = string
+#   description = "Key used for ssh"
+#   default     = "ec2key"
+
+# }
