@@ -1,7 +1,7 @@
-# Key pair
-# resource "aws_key_pair" "ec2_key" {
-#   key_name   = "ec2_key"
-#   public_key = file("~/.ssh/id_rsa.pub")
+# Create Key pair
+# resource "aws_key_pair" "key" {
+#   key_name   = "key-name"
+#   public_key = file("~/.ssh/key.pub")
 # }
 
 # Security groups
@@ -14,14 +14,14 @@ resource "aws_security_group" "ec2-server-sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming HTTP connections"
+    description = "Allow HTTP Traffic"
   }
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow incoming SSH connections"
+    description = "Allow SSH connections"
   }
   ingress {
     description = "Allow HTTPS Traffic"

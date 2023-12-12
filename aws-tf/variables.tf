@@ -1,6 +1,5 @@
 # Define variables
 
-# For network
 # Availability Zone
 variable "ec2_az" {
   type        = string
@@ -24,24 +23,19 @@ variable "ec2_public_subnet_cidr" {
 variable "ec2_server_type" {
   type        = string
   description = "EC2 type for Ubuntu Linux Server"
-  default     = "t2.micro"
+  default     = "t3.medium"
 }
 
 variable "ec2_server_ami" {
   type        = string
   description = "EC2 Ubuntu AMI"
-  default     = "ami-000b3a073fc20e415"
+  default     = "ami-0fc5d935ebf8bc3bc" # Ubuntu 22.04 LTS
+  # default     = "ami-000b3a073fc20e415" # Ubuntu 14.04 
+  # default     = "ami-0230bd60aa48260c6" # Amazon Linux
 }
 
 variable "ec2_server_public_ip" {
   type        = bool
-  description = "Associate,public IP to EC2"
+  description = "Associate public IP to EC2"
   default     = true
 }
-
-# variable "ec2_key_pair" {
-#   type        = string
-#   description = "Key used for ssh"
-#   default     = "ec2key"
-
-# }

@@ -1,3 +1,5 @@
+Also another way for user data in main.tf
+
 # Create EC2
 resource "aws_instance" "ec2-server" {
   ami                         = var.ec2_server_ami
@@ -9,6 +11,17 @@ resource "aws_instance" "ec2-server" {
 
   # key_name                    = aws_key_pair.key.key_name
   # iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
+
+  # user_data = <<EOF
+  # #!/bin/bash
+  # echo "Copying public Key to ec2-server"
+  # sudo chown root:root /home
+  # sudo chmod 755 /home
+  # sudo chown ubuntu:ubuntu /home/ubuntu -R
+  # sudo chmod 700 /home/ubuntu /home/ubuntu/.ssh
+  # sudo chmod 600 /home/ubuntu/.ssh/authorized_keys
+  # echo -e "ssh-rsa ..." >> /home/ubuntu/.ssh/authorized_keys
+  # EOF
     
   tags = {
     Environment = "dev"
