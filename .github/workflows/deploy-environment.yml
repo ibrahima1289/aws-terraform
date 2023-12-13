@@ -70,25 +70,38 @@ jobs:
     needs: [terraform-plan]
 
     steps:
-    #   # Checkout main 
-    #   - name: Checkout
-    #     uses: actions/checkout@v3
-    #     with:
-    #       ref: main
+      # Checkout main 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
 
-    #   # Install Terraform CLI
-    #   - name: Setup Terraform
-    #     uses: hashicorp/setup-terraform@v2
-    #     with:
-    #       terraform_wrapper: false
+      # Install Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
 
-    #   # Set AWS credentials
-    #   - name: Configure AWS Credentials
-    #     uses: aws-actions/configure-aws-credentials@v2
-    #     with:
-    #       aws-region: ${{ secrets.AWS_REGION }}
-    #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      # Set AWS credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Initialize load remote state
+      - name: Terraform Init-Apply
+        run: | 
+            cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
+            terraform init -input=false
+
+      # Generates execution plan
+      - name: Terraform Plan-Apply
+        run: |
+            cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
+            terraform plan -out=${{ inputs.environment }}-tfplan
+        continue-on-error: false
 
       # Provision Infrastructure
       - name: Terraform Apply
