@@ -53,8 +53,7 @@ jobs:
       - name: Terraform Init
         run: | 
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
-          terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
-        #   terraform init -input=false
+          terraform init -input=false
 
       # Check TF configuration files format
       - name: Terraform Format
