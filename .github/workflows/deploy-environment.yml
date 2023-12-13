@@ -41,8 +41,7 @@ jobs:
 
       # Initialize load remote state
       - name: Terraform Init
-        run: |
-          cd aws-terraform/aws-terraform/${{ inputs.environment }} 
+        run: | 
           terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
 
       # Check TF configuration files format
