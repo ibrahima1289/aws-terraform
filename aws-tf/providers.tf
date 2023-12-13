@@ -1,12 +1,20 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
+      source       = "hashicorp/aws"
+      version      = "~> 4.0"
     }
   }
 
   required_version = ">= 1.2.0"
+   
+  backend "s3" {
+    bucket     	   = "dev-tfstate2023"
+    key        	   = "state/terraform.tfstate"
+    region         = "us-west-2"
+    encrypt    	   = false # Should be set to true
+    # dynamodb_table = "dev_tf_lockid"
+  }
 }
 
 provider "aws" {

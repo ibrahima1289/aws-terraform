@@ -1,0 +1,27 @@
+name: Manual Terraform Destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to be destroyed'
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+        default: dev
+        required: true
+
+jobs:
+  destroy:
+    name: "Destroy ${{ inputs.environment }} Environment"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Destroy plan
+        run: terraform plan -destroy
+        continue-on-error: true
+
+      - name: Destroy resources jobs
+        id: destroy
+        run: terraform destroy -auto-approve
