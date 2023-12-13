@@ -49,7 +49,8 @@ jobs:
       - name: Terraform Init
         run: | 
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
-          terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
+          terraform init -input=false
+        #   terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
 
       # Check TF configuration files format
       - name: Terraform Format
@@ -69,29 +70,29 @@ jobs:
     needs: [terraform-plan]
 
     steps:
-      # Checkout main 
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: main
+    #   # Checkout main 
+    #   - name: Checkout
+    #     uses: actions/checkout@v3
+    #     with:
+    #       ref: main
 
-      # Install Terraform CLI
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
+    #   # Install Terraform CLI
+    #   - name: Setup Terraform
+    #     uses: hashicorp/setup-terraform@v2
+    #     with:
+    #       terraform_wrapper: false
 
-      # Set AWS credentials
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #   # Set AWS credentials
+    #   - name: Configure AWS Credentials
+    #     uses: aws-actions/configure-aws-credentials@v2
+    #     with:
+    #       aws-region: ${{ secrets.AWS_REGION }}
+    #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      # Destroy
+      # Provision Infrastructure
       - name: Terraform Apply
         id: apply
         run: |
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
-          terraform apply -auto-approve ${{ inputs.environment }}-tfplan 
+          terraform apply -auto-approve "${{ inputs.environment }}-tfplan" 
