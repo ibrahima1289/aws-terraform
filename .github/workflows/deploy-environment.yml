@@ -42,7 +42,7 @@ jobs:
       # Initialize load remote state
       - name: Terraform Init
         run: |
-          cd aws-terraform/${{ inputs.environment }} 
+          cd aws-terraform/aws-terraform/${{ inputs.environment }} 
           terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
 
       # Check TF configuration files format
@@ -52,7 +52,7 @@ jobs:
       # Generates execution plan
       - name: Terraform Plan
         run: |
-          cd aws-terraform/${{ inputs.environment }}
+          cd aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform plan -out=${{ inputs.environment }}-tfplan
         continue-on-error: true
 
@@ -87,5 +87,5 @@ jobs:
       - name: Terraform Destroy
         id: destroy
         run: |
-          cd aws-terraform/${{ inputs.environment }}
+          cd aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform apply -auto-approve ${{ inputs.environment }}-tfplan 
