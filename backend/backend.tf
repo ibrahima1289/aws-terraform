@@ -1,19 +1,19 @@
 # Create S3 bucket
-resource "aws_s3_bucket" "terraform_state" {
-  bucket        = "dev-tfstate2023"
-  force_destroy = true
+# resource "aws_s3_bucket" "terraform_state" {
+#   bucket        = "dev-tfstate2023"
+#   force_destroy = true
 
-  lifecycle {
-    prevent_destroy = false # Should be set to true
-  }
-}
+#   lifecycle {
+#     prevent_destroy = false # Should be set to true
+#   }
+# }
 
-resource "aws_s3_bucket_versioning" "terraform_state" {
-  bucket = aws_s3_bucket.terraform_state.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
+# resource "aws_s3_bucket_versioning" "terraform_state" {
+#   bucket = aws_s3_bucket.terraform_state.id
+#   versioning_configuration {
+#     status = "Enabled"
+#   }
+# }
 
 # resource "aws_dynamodb_table" "terraform_state_lock" {
 #   name           = "dev-state"
