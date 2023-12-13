@@ -25,6 +25,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: main
+        
+      - name: display files
+        run: |
+          ls -altr /home/runner/work/aws-terraform/aws-terraform
+          pwd
+          ls -altr /home/runner/work/aws-terraform
+          pwd
+          ls -altr /home/runner/work
+          pwd
+          ls -altr /home/runner
 
       # Install the latest version Terraform CLI
       - name: Setup Terraform
