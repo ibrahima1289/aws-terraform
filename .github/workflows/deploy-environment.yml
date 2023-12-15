@@ -54,6 +54,7 @@ jobs:
         run: | 
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform init -input=false
+          ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
 
       # Check TF configuration files format
       - name: Terraform Format
@@ -64,6 +65,7 @@ jobs:
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -out=${{ inputs.environment }}-create-tfplan
+            ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
         continue-on-error: false
 
   terraform-apply:
@@ -98,12 +100,14 @@ jobs:
         run: | 
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform init -input=false
+            ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
 
       # Generates execution plan
       - name: Terraform Plan-Apply
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -out=${{ inputs.environment }}-create-tfplan
+            ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
         continue-on-error: false
 
       # Provision Infrastructure
@@ -113,3 +117,4 @@ jobs:
         run: |
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform apply -auto-approve "${{ inputs.environment }}-create-tfplan" 
+          ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
