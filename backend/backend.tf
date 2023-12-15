@@ -48,7 +48,7 @@ resource "aws_s3_bucket_policy" "terraform_aws_state" {
           "s3:GetObject",
           "s3:GetObjectVersion"
         ],
-        "Resource": "arn:aws:s3:::dev-aws-tfstate/*"
+        "Resource": "arn:aws:s3:::dev-aws-tfstate12/*"
       }
     ]
   }
