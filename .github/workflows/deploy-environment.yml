@@ -64,12 +64,19 @@ jobs:
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -out=${{ inputs.environment }}-create-tfplan
         continue-on-error: false
-
+  
+  approve-creation:
+    name: Approve Plan
+    runs-on: ubuntu-latest
+    needs: [terraform-plan]
+    environment:
+      name: release-approver
+  
   terraform-apply:
     name: Provision ${{ inputs.environment }} Environment
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
-    needs: [terraform-plan]
+    needs: [terraform-plan, approve-creation]
 
     steps:
       # Checkout main 

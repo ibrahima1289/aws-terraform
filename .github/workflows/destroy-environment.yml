@@ -66,11 +66,18 @@ jobs:
             ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
         continue-on-error: false
 
+  approve-destruction:
+    name: Approve Plan
+    runs-on: ubuntu-latest
+    needs: [terraform-plan]
+    environment:
+      name: release-approver
+
   terraform-destroy:
-    name: Destroy - ${{ inputs.environment }} Environment" 
+    name: Destroy - ${{ inputs.environment }} Environment 
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
-    needs: [terraform-plan]
+    needs: [terraform-plan, approve-destruction]
 
     steps:
       # Checkout main 
