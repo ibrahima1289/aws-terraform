@@ -24,28 +24,22 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
 * Make sure to copy the public key pair to the EC2 from the Terraform code - see `security.tf` file
 * Once files are ready, run `terraform init` to initialize the environment<br>
 * Run `terraform plan` - it should show you what will be created<br>
-![](images/aws4.PNG)
-
 * Finally, run `terraform apply --auto-approve` to create the resources<br>
-![](images/aws5.PNG)
-
 * You can see on the portal that the instance with the ID `i-01347b7200e15547a` was created<br>
-![](images/aws6.PNG)
-
 * Now [ssh](https://cloudinfrastructureservices.co.uk/how-to-create-linux-aws-ec2-instance-using-terraform/) to the EC2 created - make sure to specify the pathe to the private key<br>
     * Run the command `sudo ssh -i "/path/to/private/key/pair/you/created/<key_name>" <username>@<public_ip>`
     ![](images/aws7.PNG)
     * We can also access the NGINX server we (EC2) - just put the public IP address to the browser.<br>
-    <img src="images/aws9.PNG" width=60% height=20%>
+    ![](images/aws9.PNG)
 
 * Clean up to avoid charges - run `terraform destroy --auto-approve`<br>
 ![](images/aws8.PNG)
-* See [Terraform CLI](https://developer.hashicorp.com/terraform/cli/commands) for more Terraform commands.<br><br>
+* See [Terraform CLI](https://developer.hashicorp.com/terraform/cli/commands) for more Terraform commands.<br>
 #### 2. Use GitHub Action - A pipeline
 * Using Github Actions here to automate the above deployment.
 * New inprovements:
     * Manage terraform state files using [AWS S3 bucket](https://spacelift.io/blog/terraform-s3-backend)
-    * Generate [AWS Policy](https://awspolicygen.s3.amazonaws.com/policygen.html)
+    * Generate [AWS Policy](https://awspolicygen.s3.amazonaws.com/policygen.html) for S3 bucket
     * Add secrets in [Github Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)
     * Add [manual validation](https://dineshba.github.io/posts/github-actions-approval/) before deploying/destroying
 * Deploying after configuration:<br>
@@ -53,7 +47,7 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
     <img src="images/aws11.PNG" width=30% height=30%>
 
     * Deploy the environment using the create pipeline<br>
-    <img src="images/aws12.PNG" width=100% height=100%>
+    ![](images/aws12.PNG)
 
     * Destroy the environment using the destroy pipeline<br>
     <img src="images/aws13.PNG" width=100% height=100%>
