@@ -20,7 +20,7 @@ permissions:
           
 jobs:
   terraform-plan:
-    name: Terraform Plan
+    name: Terraform Plan - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     steps:
@@ -31,7 +31,7 @@ jobs:
           ref: main
       
       # Displays checkout files in runner
-      - name: Display Repo Files
+      - name: Display - ${{ inputs.environment }} Repo Files
         run: |
           pwd
           ls -altr /home/runner/work/aws-terraform/aws-terraform
@@ -50,11 +50,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Initialize load remote state
-      - name: Terraform Init
+      - name: Terraform Init - ${{ inputs.environment }}
         run: | 
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform init -input=false
-          ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
 
       # Check TF configuration files format
       - name: Terraform Format
@@ -65,7 +64,6 @@ jobs:
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -out=${{ inputs.environment }}-create-tfplan
-            ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
         continue-on-error: false
 
   terraform-apply:
@@ -96,14 +94,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Initialize load remote state
-      - name: Terraform Init-Apply
+      - name: Terraform Init-Apply - ${{ inputs.environment }}
         run: | 
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform init -input=false
             ls -altr /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
 
       # Generates execution plan
-      - name: Terraform Plan-Apply
+      - name: Terraform Plan-Apply - ${{ inputs.environment }}
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -out=${{ inputs.environment }}-create-tfplan
@@ -111,7 +109,7 @@ jobs:
         continue-on-error: false
 
       # Provision Infrastructure
-      - name: Terraform Apply
+      - name: Terraform Apply - ${{ inputs.environment }}
         env:
           PUBLIC_KEY: ${{ secrets.PUBLIC_SSH_KEY }}
         run: |

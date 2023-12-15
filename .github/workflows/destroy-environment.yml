@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   terraform-plan:
-    name: Terraform Plan for "${{ inputs.environment }}"
+    name: Terraform Plan - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     steps:
@@ -50,17 +50,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Initialize load remote state
-      - name: Terraform Init
+      - name: Terraform Init - ${{ inputs.environment }}
         run: | 
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform init -input=false
 
       # Check TF configuration files format
-      - name: Terraform Format
+      - name: Terraform Format - ${{ inputs.environment }}
         run: terraform fmt -check
 
       # Generates execution plan
-      - name: Terraform Plan
+      - name: Terraform Plan - ${{ inputs.environment }}
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -destroy -out=${{ inputs.environment }}-destroy-tfplan
@@ -68,14 +68,14 @@ jobs:
         continue-on-error: false
 
   terraform-destroy:
-    name: "Destroy ${{ inputs.environment }} Environment"
+    name: "Destroy - ${{ inputs.environment }} Environment" 
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan]
 
     steps:
       # Checkout main 
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
         with:
           ref: main
@@ -95,20 +95,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Initialize load remote state
-      - name: Terraform Init-Destroy
+      - name: Terraform Init-Destroy - ${{ inputs.environment }}
         run: | 
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform init -input=false
 
       # Generates execution plan
-      - name: Terraform Plan-Destroy
+      - name: Terraform Plan-Destroy - ${{ inputs.environment }}
         run: |
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
             terraform plan -destroy -out=${{ inputs.environment }}-destroy-tfplan
         continue-on-error: false
 
       # Provision Infrastructure
-      - name: Terraform Destroy
+      - name: Terraform Destroy - ${{ inputs.environment }}
         run: |
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform apply -auto-approve "${{ inputs.environment }}-destroy-tfplan" 
