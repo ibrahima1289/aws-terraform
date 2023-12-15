@@ -44,14 +44,11 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
     * Add [manual validation](https://dineshba.github.io/posts/github-actions-approval/) before deploying/destroying
 * Deploying after configuration:<br>
     * Choose the environment to be deployed<br>
-    <img src="images/aws11.PNG" width=30% height=30%>
-
+    ![](images/aws11.PNG)
     * Deploy the environment using the create pipeline<br>
     ![](images/aws12.PNG)
-
     * Destroy the environment using the destroy pipeline<br>
-    <img src="images/aws13.PNG" width=100% height=100%>
-
+    ![](images/aws13.PNG)
 * Possible improvements:<br>
     * Add test stage
     * Add security scanning stage
