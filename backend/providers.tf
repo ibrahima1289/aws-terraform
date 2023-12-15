@@ -13,7 +13,6 @@ terraform {
     key        	   = "state/backend-terraform.tfstate"
     region         = "us-east-1"
     encrypt    	   = false # Should be set to true
-    # dynamodb_table = ""
   }
 }
 

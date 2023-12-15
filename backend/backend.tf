@@ -41,8 +41,9 @@ resource "aws_s3_bucket_public_access_block" "terraform_aws_state" {
 
 # Add s3 policy
 resource "aws_s3_bucket_policy" "terraform_aws_state" {
-  bucket = "${aws_s3_bucket.terraform_aws_state.id}"
-  policy =<<EOF
+  bucket         = "${aws_s3_bucket.terraform_aws_state.id}"
+  depends_on     = [ aws_s3_bucket_public_access_block.terraform_aws_state ]
+  policy         =<<EOF
   {
     "Version": "2012-10-17",
     "Statement": [
