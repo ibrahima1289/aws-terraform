@@ -38,7 +38,7 @@ resource "aws_s3_bucket_policy" "terraform_aws_state" {
     "Version": "2012-10-17",
     "Statement": [
       {
-        "Sid": "Stmt1702411280633",
+        "Sid": "PublicRead",
         "Principal": "*",
         "Effect": "Allow",
         "Action": [

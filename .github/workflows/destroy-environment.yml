@@ -67,7 +67,7 @@ jobs:
         continue-on-error: false
 
   terraform-destroy:
-    name: Destroy - ${{ inputs.environment }} Environment
+    name: Destroy - ${{ inputs.environment }} Environment" 
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan]
