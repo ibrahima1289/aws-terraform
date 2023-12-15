@@ -45,7 +45,7 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
     * Run the command `sudo ssh -i "/path/to/private/key/pair/you/created/<key_name>" <username>@<public_ip>`
     ![](images/aws7.PNG)
     * We can also access the NGINX server we (EC2) - just put the public IP address to the browser.
-    <img src="images/aws9.PNG" width=50% height=20%>
+    <img src="images/aws9.PNG" width=60% height=20%>
 
 * Clean up to avoid charges - run `terraform destroy --auto-approve`<br>
 ![](images/aws8.PNG)
@@ -53,7 +53,7 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
 #### 2. Use GitHub Action - A pipeline
 * Using Github Actions here to automate the above deployment.
 * New folder structure <br>
-<img src="images/aws14.PNG" width=60% height=10%>
+<img src="images/aws14.PNG" width=30% height=10%>
 
 * New inprovements:
     * Manage terraform state files using [AWS S3 bucket](https://spacelift.io/blog/terraform-s3-backend)
