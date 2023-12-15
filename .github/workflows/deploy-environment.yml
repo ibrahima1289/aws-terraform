@@ -71,6 +71,10 @@ jobs:
     needs: [terraform-plan]
     environment:
       name: release-approver
+    steps:
+      - name: Validate TF Plan
+        run: | 
+           echo "Plan Validation ..."
   
   terraform-apply:
     name: Provision ${{ inputs.environment }} Environment

@@ -72,6 +72,10 @@ jobs:
     needs: [terraform-plan]
     environment:
       name: release-approver
+    steps:
+      - name: Validate TF Plan
+        run: | 
+            echo "Plan Validation ..."
 
   terraform-destroy:
     name: Destroy - ${{ inputs.environment }} Environment 
