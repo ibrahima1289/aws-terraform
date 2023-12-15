@@ -1,6 +1,6 @@
 # Create S3 bucket
 resource "aws_s3_bucket" "terraform_aws_state" {
-  bucket        = "dev-aws-tfstate"
+  bucket        = "dev-aws-tfstate-12"
   force_destroy = true
   # region        = "us-east-1"
 
