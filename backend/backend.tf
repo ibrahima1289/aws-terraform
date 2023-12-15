@@ -2,7 +2,7 @@
 resource "aws_s3_bucket" "terraform_aws_state" {
   bucket        = "dev-aws-tfstate"
   force_destroy = true
-  region        = "us-east-1"
+  # region        = "us-east-1"
 
   lifecycle {
     prevent_destroy = false # Should be set to true
