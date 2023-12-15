@@ -27,15 +27,14 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
 * Finally, run `terraform apply --auto-approve` to create the resources<br>
 * You can see on the portal that the instance with the ID `i-01347b7200e15547a` was created<br>
 * Now [ssh](https://cloudinfrastructureservices.co.uk/how-to-create-linux-aws-ec2-instance-using-terraform/) to the EC2 created - make sure to specify the pathe to the private key<br>
-    * Run the command `sudo ssh -i "/path/to/private/key/pair/you/created/<key_name>" <username>@<public_ip>`
-    ![](images/aws7.PNG)
+    * Run the command `sudo ssh -i "/path/to/private/key/<key_name>" <username>@<public_ip>`
     * We can also access the NGINX server we (EC2) - just put the public IP address to the browser.<br>
     ![](images/aws9.PNG)
 
 * Clean up to avoid charges - run `terraform destroy --auto-approve`<br>
 ![](images/aws8.PNG)
 * See [Terraform CLI](https://developer.hashicorp.com/terraform/cli/commands) for more Terraform commands.<br>
-#### 2. Use GitHub Action - A pipeline
+#### 2. Use GitHub Action - Using pipelines
 * Using Github Actions here to automate the above deployment.
 * New inprovements:
     * Manage terraform state files using [AWS S3 bucket](https://spacelift.io/blog/terraform-s3-backend)
