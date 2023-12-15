@@ -66,7 +66,7 @@ jobs:
         continue-on-error: false
 
   terraform-apply:
-    name: "Provision ${{ inputs.environment }} Environment"
+    name: Provision ${{ inputs.environment }} Environment
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan]
