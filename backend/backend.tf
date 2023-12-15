@@ -1,7 +1,8 @@
 # Create S3 bucket
-resource "aws_s3_bucket" "terraform_state" {
+resource "aws_s3_bucket" "terraform_aws_state" {
   bucket        = "dev-aws-tfstate"
   force_destroy = true
+  region        = "us-east-1"
 
   lifecycle {
     prevent_destroy = false # Should be set to true
@@ -9,8 +10,8 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 # Add resource versionong
-resource "aws_s3_bucket_versioning" "terraform_state" {
-  bucket = aws_s3_bucket.terraform_state.id
+resource "aws_s3_bucket_versioning" "terraform_aws_state" {
+  bucket = aws_s3_bucket.terraform_aws_state.id
   versioning_configuration {
     status = "Enabled"
   }
@@ -30,8 +31,8 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 }
 
 # Add s3 policy
-resource "aws_s3_bucket_policy" "terraform_state" {
-  bucket = "${aws_s3_bucket.terraform_state.id}"
+resource "aws_s3_bucket_policy" "terraform_aws_state" {
+  bucket = "${aws_s3_bucket.terraform_aws_state.id}"
   policy =<<EOF
   {
     "Version": "2012-10-17",
