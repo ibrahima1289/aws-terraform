@@ -97,7 +97,7 @@ jobs:
       - name: Terraform Init-Apply
         run: | 
             cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
-            terraform init -reconfigure -backend-config=settings/${{ inputs.environment }}/backend.conf
+            terraform init -input=false
 
       # Generates execution plan
       - name: Terraform Plan-Apply
@@ -108,6 +108,8 @@ jobs:
 
       # Provision Infrastructure
       - name: Terraform Apply
+        env:
+          PUBLIC_KEY: ${{ secrets.PUBLIC_SSH_KEY }}
         run: |
           cd /home/runner/work/aws-terraform/aws-terraform/${{ inputs.environment }}
           terraform apply -auto-approve "${{ inputs.environment }}-create-tfplan" 
