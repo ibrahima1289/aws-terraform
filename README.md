@@ -63,10 +63,13 @@ This is just to practice provisioning AWS resources using IaC (Terraform).<br><b
 * Deploying after configuration:<br>
     * Choose the environment to be deployed<br>
     <img src="images/aws11.PNG" width=50% height=30%>
+
     * Deploy the environment using the create pipeline<br>
     <img src="images/aws12.PNG" width=100% height=100%>
+
     * Destroy the environment using the destroy pipeline<br>
     <img src="images/aws13.PNG" width=100% height=100%>
+    
 * Possible improvements:<br>
     * Add test stage
     * Add security scanning stage
