@@ -18,7 +18,7 @@ resource "aws_s3_bucket_versioning" "terraform_state" {
 
 # Add lock to prevent state corruption due to simultanous change push
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = "dev-aws-state"
+  name           = "dev_aws_lockid"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"
@@ -29,6 +29,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
   }
 }
 
+# Add s3 policy
 resource "aws_s3_bucket_policy" "terraform_state" {
   bucket = "${aws_s3_bucket.terraform_state.id}"
   policy =<<EOF

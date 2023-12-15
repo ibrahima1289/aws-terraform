@@ -13,7 +13,7 @@ terraform {
     key        	   = "state/dev-terraform.tfstate"
     region         = "us-east-1"
     encrypt    	   = false # Should be set to true
-    dynamodb_table = "dev_tf_lockid"
+    dynamodb_table = "dev_aws_lockid"
   }
 }
 
