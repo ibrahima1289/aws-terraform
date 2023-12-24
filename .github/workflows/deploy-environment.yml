@@ -77,7 +77,7 @@ jobs:
            echo "Plan Validation ..."
   
   terraform-apply:
-    name: Provision ${{ inputs.environment }} Environment
+    name: Provision - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan, approve-creation]
