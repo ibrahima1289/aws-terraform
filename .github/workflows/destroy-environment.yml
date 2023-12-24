@@ -78,7 +78,7 @@ jobs:
             echo "Plan Validation ..."
 
   terraform-destroy:
-    name: Destroy - ${{ inputs.environment }}
+    name: Destroy - Env
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan, approve-destruction]
