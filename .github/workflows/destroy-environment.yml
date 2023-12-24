@@ -73,18 +73,12 @@ jobs:
     environment:
       name: release-approver
     steps:
-      - name: Manual TF Plan Validation
-        uses: trstringer/manual-approval@v1.6.0
-        with:
-          secret: ${{ github.TOKEN }}
-          minimum-approvals: 1
-          approvers: release-approver
-      # - name: Validate TF Plan
-      #   run: | 
-      #       echo "Plan Validation ..."
+      - name: Validate TF Plan
+        run: | 
+            echo "Plan Validation ..."
 
   terraform-destroy:
-    name: Destroy - ${{ inputs.environment }} Environment 
+    name: Destroy - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: "${{ inputs.environment }}"
     needs: [terraform-plan, approve-destruction]
